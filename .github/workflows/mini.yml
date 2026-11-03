@@ -1,0 +1,33 @@
+name: Build and upload mini program
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    concurrency: mini-upload
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.6
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+      - name: Upload experience version
+        env:
+          WECHAT_UPLOAD_PRIVATE_KEY: ${{ secrets.WECHAT_UPLOAD_PRIVATE_KEY }}
+          MINI_VERSION: 0.0.${{ github.run_number }}
+          MINI_DESC: GitHub Actions ${{ github.sha }}
+        run: |
+          test -n "$WECHAT_UPLOAD_PRIVATE_KEY"
+          umask 077
+          key_path="$(mktemp)"
+          trap 'rm -f "$key_path"' EXIT
+          printf '%s\n' "$WECHAT_UPLOAD_PRIVATE_KEY" > "$key_path"
+          WECHAT_UPLOAD_PRIVATE_KEY_PATH="$key_path" pnpm upload

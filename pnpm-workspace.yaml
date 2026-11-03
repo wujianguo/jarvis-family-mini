@@ -1,0 +1,10 @@
+packages:
+  - .
+
+allowBuilds:
+  '@tarojs/binding': true
+  '@tarojs/cli': true
+  esbuild: true
+  core-js: true
+  less: true
+  protobufjs: true
