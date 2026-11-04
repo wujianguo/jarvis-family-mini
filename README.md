@@ -2,7 +2,7 @@
 
 独立于 [jarvis-family](https://github.com/wujianguo/jarvis-family) 的 Taro 小程序项目。AppID 与原始 ID 是公开配置；真实值通过构建变量提供。
 
-复制 `.env.example` 为本地 `.env`，并在 shell 中加载这些变量后构建。`WECHAT_MINI_APPID` 用来生成忽略提交的 `project.config.json`；`TARO_APP_*` 变量编入小程序包。`TARO_APP_API_BASE` 为完整的 HTTPS API 根路径。`WECHAT_MINI_ORIGINAL_ID` 仅用于展示/备案。
+`.env.example` 仅含占位值。复制为本地 `.env`，填入实际配置并在 shell 中加载这些变量后构建；不要提交本地 `.env`。`WECHAT_MINI_APPID` 用来生成忽略提交的 `project.config.json`；`TARO_APP_*` 变量编入小程序包。`TARO_APP_API_BASE` 为完整的 HTTPS API 根路径。`WECHAT_MINI_ORIGINAL_ID` 仅用于展示/备案。
 
 ```bash
 corepack enable
