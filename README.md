@@ -20,6 +20,8 @@ pnpm build
 
 `WECHAT_MINI_APPID` 用于生成 `project.config.json`，必须与 `TARO_APP_WECHAT_MINI_APPID` 一致。`TARO_APP_*` 变量会编入小程序包；原始 ID 仅用于展示和备案。生成的 `project.config.json` 与本地 `.env` 均不提交。
 
+录入快递时可只贴短信正文，或从相册/相机选一张不超过 3 MB 的 JPEG、PNG、WebP 截图进行识别；识别结果不完整时可补齐后确认保存。手填地点和取件码仍可直接保存。
+
 ## 上传体验版
 
 先完成构建，将微信小程序上传私钥保存在仓库外，并设置其文件路径：
