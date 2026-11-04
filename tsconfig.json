@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["@tarojs/taro"]
+    "types": ["@tarojs/taro", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "config/**/*.ts"]
 }

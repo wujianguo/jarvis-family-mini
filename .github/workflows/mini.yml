@@ -8,15 +8,21 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     concurrency: mini-upload
+    env:
+      WECHAT_MINI_APPID: ${{ vars.WECHAT_MINI_APPID }}
+      TARO_APP_WECHAT_MINI_APPID: ${{ vars.WECHAT_MINI_APPID }}
+      TARO_APP_WECHAT_MINI_ORIGINAL_ID: ${{ vars.WECHAT_MINI_ORIGINAL_ID }}
+      TARO_APP_API_BASE: ${{ vars.PUBLIC_API_BASE }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
       - uses: pnpm/action-setup@v4
         with:
           version: 10.34.6
       - run: pnpm install --frozen-lockfile
+      - run: ': "${WECHAT_MINI_APPID:?Set WECHAT_MINI_APPID repository variable}"; : "${TARO_APP_WECHAT_MINI_ORIGINAL_ID:?Set WECHAT_MINI_ORIGINAL_ID repository variable}"; : "${TARO_APP_API_BASE:?Set PUBLIC_API_BASE repository variable}"'
       - run: pnpm typecheck
       - run: pnpm build
       - name: Upload experience version

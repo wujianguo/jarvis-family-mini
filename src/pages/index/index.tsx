@@ -7,7 +7,7 @@ import {
   setToken,
   token,
   clearToken,
-  type Pickup,
+  type Pickup
 } from "../../api"
 export default function Index() {
   const [identity, setIdentity] = useState<{
@@ -37,7 +37,7 @@ export default function Index() {
     try {
       setIdentity(
         await api("/auth/wechat-mini/identity", "POST", {
-          code: await wxCode(),
+          code: await wxCode()
         })
       )
     } catch (e) {
@@ -104,8 +104,12 @@ export default function Index() {
                 复制 unionid
               </Button>
             )}
-            <Text className="label">AppID · wxce94463a6a805e99</Text>
-            <Text className="label">原始 ID · gh_a696f88a7ea0</Text>
+            <Text className="label">
+              AppID · {process.env.TARO_APP_WECHAT_MINI_APPID}
+            </Text>
+            <Text className="label">
+              原始 ID · {process.env.TARO_APP_WECHAT_MINI_ORIGINAL_ID}
+            </Text>
           </View>
           <Button className="primary" loading={busy} onClick={exchange}>
             已加入白名单，微信登录

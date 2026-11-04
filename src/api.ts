@@ -1,5 +1,6 @@
 import Taro from "@tarojs/taro"
-export const ROOT = "https://share.libms.top/family/api"
+export const ROOT = process.env.TARO_APP_API_BASE?.replace(/\/$/, "") || ""
+if (!ROOT) throw new Error("TARO_APP_API_BASE is required")
 const TOKEN = "woshi_session"
 export const token = () => Taro.getStorageSync<string>(TOKEN)
 export const setToken = (value: string) => Taro.setStorageSync(TOKEN, value)
@@ -17,8 +18,8 @@ export async function api<T>(
     data,
     header: {
       "Content-Type": "application/json",
-      ...(token() ? { Authorization: `Bearer ${token()}` } : {}),
-    },
+      ...(token() ? { Authorization: `Bearer ${token()}` } : {})
+    }
   })
   if (r.statusCode >= 400)
     throw new Error(r.data?.error?.message || `请求失败 ${r.statusCode}`)

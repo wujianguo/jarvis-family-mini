@@ -7,9 +7,12 @@
     "node": ">=20.18.3"
   },
   "scripts": {
+    "predev": "node scripts/configure.mjs",
     "dev": "taro build --type weapp --watch",
+    "prebuild": "node scripts/configure.mjs",
     "build": "taro build --type weapp",
     "typecheck": "tsc --noEmit",
+    "preupload": "node scripts/configure.mjs",
     "upload": "node scripts/upload.mjs"
   },
   "dependencies": {
